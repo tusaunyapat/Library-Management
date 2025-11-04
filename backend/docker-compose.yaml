@@ -1,0 +1,16 @@
+# Run: docker-compose --env-file ./config/config.env up -d
+
+services:
+  mongo:
+    image: mongo:6
+    container_name: library-service-mongo
+    restart: always
+    ports:
+      - "27010:27017"
+    environment:
+      MONGO_INITDB_DATABASE: ${DB_NAME}
+    volumes:
+      - library_mongo_data:/data/db
+
+volumes:
+  library_mongo_data:
