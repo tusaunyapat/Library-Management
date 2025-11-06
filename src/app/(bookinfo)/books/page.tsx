@@ -1,7 +1,8 @@
+"use client";
 import BookCatalog from "@/components/BookCatalog";
-import getBooks from "@/libs/getBooks";
-export default async function Book() {
-  const books = await getBooks();
+import { useBooks } from "@/context/BooksContext";
+export default function Book() {
+  const { books } = useBooks();
   console.log(books);
 
   return (
@@ -12,7 +13,7 @@ export default async function Book() {
       <p className="text-gray-600 text-center">
         Explore our collection of books. Click on a book to see more details.
       </p>
-      <BookCatalog booksJson={books} />
+      <BookCatalog books={books} />
     </main>
   );
 }

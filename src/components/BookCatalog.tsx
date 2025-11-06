@@ -1,14 +1,9 @@
+"use client";
 import Link from "next/link";
 import Card from "./Card";
-import { BookJson } from "../type/interface";
+import { BookItem, BookJson } from "../type/interface";
 
-export default async function BookCatalog({
-  booksJson,
-}: {
-  booksJson: Promise<BookJson>;
-}) {
-  const resolvedData = await booksJson;
-
+export default function BookCatalog({ books }: { books: BookItem[] }) {
   return (
     <div
       className="
@@ -17,8 +12,8 @@ export default async function BookCatalog({
         auto-rows-fr
       "
     >
-      {resolvedData.data.map((book) => (
-        <Link key={book.id} href={`/book/${book.id}`} className="w-full">
+      {books.map((book) => (
+        <Link key={book.id} href={`/books/${book.id}`} className="w-full">
           <Card bookInfo={book} />
         </Link>
       ))}

@@ -9,6 +9,7 @@ export default async function BookDetailPage({
 }) {
   const { vid } = await params;
   const book: BookItem = await getBook(vid);
+  console.log(book);
 
   return (
     <main className="flex justify-center p-5">

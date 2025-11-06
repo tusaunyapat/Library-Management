@@ -7,6 +7,7 @@ import Link from "next/link";
 export default async function TopMenu() {
   const session = await getServerSession(authOptions);
   console.log("top menu");
+  console.log(session);
 
   return (
     <div className="flex flex-row gap-4 justify-between  items-center p-4 bg-white shadow-md h-18">
@@ -25,6 +26,9 @@ export default async function TopMenu() {
           </Link>
         )}
         <TopMenuItem title="My Booking" pageRef="/mybooking" />
+        {session && session?.user.role == "admin" && (
+          <TopMenuItem title="Manage Book" pageRef="/managebook" />
+        )}
       </div>
       <div className="flex flex-row items-center">
         <TopMenuItem title="Booking" pageRef="/booking" />
