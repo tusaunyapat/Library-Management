@@ -7,6 +7,7 @@ import { getServerSession } from "next-auth";
 import { authOptions } from "./api/auth/[...nextauth]/authOptions";
 import NextAuthProvider from "@/providers/NextAuthProvider";
 import ReduxProvider from "@/redux/ReduxProvider";
+import { BooksProvider } from "@/context/BooksContext";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -35,7 +36,7 @@ export default async function RootLayout({
         <ReduxProvider>
           <NextAuthProvider session={nextAuthSession}>
             <TopMenu />
-            {children}
+            <BooksProvider>{children}</BooksProvider>
           </NextAuthProvider>
         </ReduxProvider>
       </body>
