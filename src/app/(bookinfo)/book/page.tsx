@@ -1,5 +1,5 @@
-import VenueCatalog from "@/components/VenueCatalog";
-import getVenues from "@/libs/getVenues";
+import VenueCatalog from "@/components/BookCatalog";
+import getVenues from "@/libs/getBooks";
 export default async function Venue() {
   const venues = await getVenues();
 
