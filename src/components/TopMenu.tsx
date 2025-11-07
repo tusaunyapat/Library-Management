@@ -7,6 +7,7 @@ import Link from "next/link";
 export default async function TopMenu() {
   const session = await getServerSession(authOptions);
   console.log("top menu");
+  console.log(session);
 
   return (
     <div className="fixed top-0 z-50 w-full flex flex-row gap-4 justify-between  items-center p-4 bg-white/10 shadow-md h-18 backdrop-blur-xs">

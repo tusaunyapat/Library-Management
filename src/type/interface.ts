@@ -1,22 +1,18 @@
-export interface VenueItem {
+export interface BookItem {
   _id: string;
-  name: string;
-  address: string;
-  district: string;
-  province: string;
-  postalcode: string;
-  tel: string;
-  picture: string;
-  dailyrate: number;
-  __v: number;
   id: string;
+  title: string;
+  author: string;
+  ISBN: string;
+  publisher: string;
+  availableAmount: number;
+  coverPicture: string;
 }
 
-export interface VenueJson {
+export interface BookJson {
   success: boolean;
   count: number;
-  pagination: Object;
-  data: VenueItem[];
+  data: BookItem[];
 }
 
 export interface BookingItem {
