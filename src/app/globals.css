@@ -1,1 +1,20 @@
 @import "tailwindcss";
+
+@font-face {
+  font-family: 'classic';
+  src: url('/fonts/MonogramsToolbox.ttf') format('truetype');
+  font-weight: 400;
+  font-style: normal;
+}
+
+@theme {
+  --font-classic: classic;
+}
+
+body {
+  background-color: black;
+  background-image: url('/library2.jpg');
+  background-size: cover;
+  background-position: center;
+  background-attachment: fixed;
+}

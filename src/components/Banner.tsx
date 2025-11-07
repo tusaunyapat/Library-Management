@@ -1,56 +1,33 @@
 /* eslint-disable @next/next/no-img-element */
 "use client";
-import React, { useState } from "react";
-import Image from "next/image";
-import Link from "next/link";
 import { useSession } from "next-auth/react";
 import { useRouter } from "next/navigation";
 
 export default function Banner() {
-  const [index, setIndex] = useState(0);
-  const imageSrc = ["cover.jpg", "cover2.jpg", "cover3.jpg", "cover4.jpg"];
   const { data: session } = useSession();
   console.log("session", session?.user.token);
   const router = useRouter();
-  const handleClick = () => {
-    setIndex((prev) => (prev + 1) % imageSrc.length);
-  };
 
   return (
-    <div
-      className="relative w-full h-screen overflow-hidden"
-      onClick={handleClick}
-    >
-      <Image
-        src={`/library1.jpg`}
-        alt={`Banner ${index + 1}`}
-        fill
-        className={`object-cover transition-opacity duration-1000 h-full w-full`}
-      />
-
-      <div className="absolute inset-0 flex flex-col items-center justify-center text-center px-6">
-        <h1 className="text-4xl md:text-5xl font-bold text-white drop-shadow-lg mb-4">
-          where every event finds its venue
-        </h1>
-        <h2 className="text-lg md:text-xl text-gray-200 max-w-2xl drop-shadow">
-          Finding the perfect venue has never been easier. Whether it&apos;s a
-          wedding, corporate event, or private party, we connect people to the
-          perfect place.
-        </h2>
-        {session ? (
-          <div className="z-30 absolute top-5 right-10 font-semibold text-amber-400 text-xl">
-            Welcome {session.user.name}
+    <div className="w-full h-screen overflow-hidden flex items-center justify-center z-49">
+      <div className="flex flex-col items-center px-6">
+        <div className="mt-18"></div>
+        <div className="w-full h-full flex flex-col items-center justify-center mb-28">
+          <div className="text-4xl font-classic font-bold text-white/90 z-49">
+            A World of Stories Awaits
           </div>
-        ) : null}
-      </div>
-      <div className="absolute bottom-36 right-24 shadow-2xl shadow-emerald-950">
-        <Link
-          href="/venue"
-          className="bg-white text-gray-900 px-6 py-3 rounded-xl shadow-lg font-semibold hover:bg-gray-100 transition"
-          onClick={(e) => e.stopPropagation()} // prevent banner click
-        >
-          Find Venues →
-        </Link>
+          <div className="text-xs font-classic font-bold text-white/60 w-[60vw] mt-4 text-center z-49">
+            From timeless classics to modern favorites — your next adventure
+            begins here. Reserve, read, and rediscover the joy of books, all
+            from your screen.
+          </div>
+          <div
+            className="px-6 py-2 bg-white/50 mt-4 rounded-md font-bold cursor-pointer hover:bg-white/70 transition z-49"
+            onClick={() => router.push("/books")}
+          >
+            Browse Books
+          </div>
+        </div>
       </div>
     </div>
   );

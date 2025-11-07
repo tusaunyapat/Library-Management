@@ -49,6 +49,7 @@ exports.getBook = async (req, res, next) => {
 // @access  Private (Admin only)
 exports.createBook = async (req, res, next) => {
   try {
+    console.log(req.body);
     const product = await Book.create(req.body);
 
     res.status(201).json({
@@ -158,5 +159,3 @@ exports.updateBookStock = async (req, res, next) => {
     next(error);
   }
 };
-
-

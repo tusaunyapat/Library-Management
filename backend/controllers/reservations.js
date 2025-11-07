@@ -8,15 +8,21 @@ const mongoose = require("mongoose");
 exports.getReservations = async (req, res, next) => {
   try {
     let requests;
-    
+
     if (req.user.role === "admin") {
       requests = await Reservation.find()
         .populate("user", "name email role")
-        .populate("book", "title author ISBN publisher availableAmount");
+        .populate(
+          "book",
+          "title author ISBN publisher availableAmount coverPicture"
+        );
     } else {
       requests = await Reservation.find({ user: req.user.id })
         .populate("user", "name email role")
-        .populate("book", "title author ISBN publisher availableAmount");
+        .populate(
+          "book",
+          "title author ISBN publisher availableAmount coverPicture"
+        );
     }
 
     res.status(200).json({
@@ -35,7 +41,9 @@ exports.getReservations = async (req, res, next) => {
 exports.getReservation = async (req, res, next) => {
   try {
     if (!mongoose.Types.ObjectId.isValid(req.params.id)) {
-      return res.status(400).json({ success: false, error: "Invalid reservation id" });
+      return res
+        .status(400)
+        .json({ success: false, error: "Invalid reservation id" });
     }
     const request = await Reservation.findById(req.params.id)
       .populate("user", "name email role")
@@ -48,7 +56,10 @@ exports.getReservation = async (req, res, next) => {
       });
     }
 
-    if (req.user.role === "member" && request.user._id.toString() !== req.user.id) {
+    if (
+      req.user.role === "member" &&
+      request.user._id.toString() !== req.user.id
+    ) {
       return res.status(403).json({
         success: false,
         error: "Not authorized to view this reservation",
@@ -76,7 +87,9 @@ exports.createReservation = async (req, res, next) => {
       });
     }
 
-    const existingCount = await Reservation.countDocuments({ user: req.user.id });
+    const existingCount = await Reservation.countDocuments({
+      user: req.user.id,
+    });
     if (existingCount >= 3) {
       return res.status(400).json({
         success: false,
@@ -142,7 +155,9 @@ exports.createReservation = async (req, res, next) => {
 exports.updateReservation = async (req, res, next) => {
   try {
     if (!mongoose.Types.ObjectId.isValid(req.params.id)) {
-      return res.status(400).json({ success: false, error: "Invalid reservation id" });
+      return res
+        .status(400)
+        .json({ success: false, error: "Invalid reservation id" });
     }
     let request = await Reservation.findById(req.params.id);
 
@@ -210,7 +225,9 @@ exports.updateReservation = async (req, res, next) => {
 exports.deleteReservation = async (req, res, next) => {
   try {
     if (!mongoose.Types.ObjectId.isValid(req.params.id)) {
-      return res.status(400).json({ success: false, error: "Invalid reservation id" });
+      return res
+        .status(400)
+        .json({ success: false, error: "Invalid reservation id" });
     }
     const request = await Reservation.findById(req.params.id);
 
@@ -238,5 +255,3 @@ exports.deleteReservation = async (req, res, next) => {
     next(error);
   }
 };
-
-

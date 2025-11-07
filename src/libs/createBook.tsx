@@ -6,7 +6,6 @@ export default async function createBook(
   bookData: Omit<BookItem, "_id" | "id">,
   token: string
 ) {
-  console.log("post to", `${process.env.NEXT_PUBLIC_BACKEND_URL}/api/v1/books`);
   const response = await fetch(
     `${process.env.NEXT_PUBLIC_BACKEND_URL}/api/v1/books`,
     {

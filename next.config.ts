@@ -2,6 +2,12 @@
 const nextConfig = {
   images: {
     domains: ["img.freepik.com", "i.etsystatic.com"], // allow this hostname
+    remotePatterns: [
+      {
+        protocol: "https",
+        hostname: "picsum.photos",
+      },
+    ],
   },
 };
 

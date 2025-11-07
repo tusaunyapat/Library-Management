@@ -32,13 +32,15 @@ export default async function RootLayout({
   const nextAuthSession = await getServerSession(authOptions);
   return (
     <html lang="en">
-      <body className={`${geistSans.variable} ${geistMono.variable}`}>
-        <ReduxProvider>
-          <NextAuthProvider session={nextAuthSession}>
-            <TopMenu />
-            <BooksProvider>{children}</BooksProvider>
-          </NextAuthProvider>
-        </ReduxProvider>
+      <body
+        className={`${geistSans.variable} ${geistMono.variable} bg-black relative`}
+      >
+        {/* <ReduxProvider> */}
+        <NextAuthProvider session={nextAuthSession}>
+          <TopMenu />
+          <BooksProvider>{children}</BooksProvider>
+        </NextAuthProvider>
+        {/* </ReduxProvider> */}
       </body>
     </html>
   );

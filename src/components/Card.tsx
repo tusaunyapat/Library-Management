@@ -6,68 +6,53 @@ import Box from "@mui/material/Box";
 import Rating from "@mui/material/Rating";
 import Typography from "@mui/material/Typography";
 import { BookItem } from "@/type/interface";
+import { useRouter } from "next/navigation";
 
 interface CardProps {
   bookInfo: BookItem;
-  onRating?: Function;
 }
 
-const Card: React.FC<CardProps> = ({ bookInfo, onRating }) => {
-  const [value, setValue] = useState(0);
+const Card: React.FC<CardProps> = ({ bookInfo }) => {
+  const router = useRouter();
 
   return (
     <InteractiveCard>
-      <div className="flex flex-row h-full w-full bg-white rounded-lg shadow-lg hover:shadow-xl transition-shadow duration-300 overflow-hidden">
-        {/* Image */}
-        <div className="relative w-full sm:w-1/3 h-60 sm:h-60">
+      <div className="flex flex-col h-full w-full rounded-lg shadow-lg hover:shadow-xl transition-shadow duration-300 items-center p-2 pb-8 pt-6">
+        <div className="w-[80%] flex justify-center h-40 relative mb-4">
           <Image
+            // className="w-52 h-72"
+            // width={100}
+            // height={300}
             src={bookInfo.coverPicture}
-            alt={bookInfo.title}
             fill
-            className="object-cover rounded-t-lg sm:rounded-l-lg sm:rounded-tr-none"
+            // fill
+            alt="bookPicture"
+            className="rounded-md"
           />
         </div>
+        <div className="text-white/80 font-classic">{bookInfo.title}</div>
+        <div className="my-2 text-white/60 font-classic text-[10px]">
+          Author:
+          {bookInfo.author}
+        </div>
 
-        {/* Content */}
-        <div className="p-4 flex flex-col flex-1 justify-between">
-          <div>
-            <h3 className="font-semibold text-lg text-gray-800 line-clamp-2">
-              {bookInfo.title}
-            </h3>
-            <p className="text-sm text-gray-600 mt-1 line-clamp-1">
-              By {bookInfo.author}
-            </p>
-            <p className="text-sm text-gray-500 mt-1">
-              Available: {bookInfo.availableAmount}
-            </p>
+        <div className="flex flex-row gap-2 items-center justify-center mt-4">
+          <div
+            className="bg-stone-700 p-2 px-4 border-[0.1px] border-black/30 cursor-pointer hover:bg-white/50 rounded-md font-classic text-xs text-white/50 transition-all duration-200 shadow-md shadow-black/20"
+            onClick={() =>
+              router.push(
+                `/booking?id=${bookInfo.id}&name=${bookInfo.title}&author=${bookInfo.author}&ISBN=${bookInfo.ISBN}`
+              )
+            }
+          >
+            Borrow Book
           </div>
-
-          {onRating && (
-            <Box
-              sx={{ "& > legend": { mt: 2 } }}
-              className="pt-2 border-t border-gray-200"
-            >
-              <Typography
-                component="legend"
-                className="text-sm font-medium mb-1"
-              >
-                Rate this book
-              </Typography>
-              <Rating
-                name={`rating-${bookInfo.title}`}
-                value={value}
-                onChange={(event, newValue) => {
-                  setValue(newValue ?? 0);
-                  onRating &&
-                    onRating({
-                      type: "add",
-                      bookName: bookInfo.title,
-                      rating: newValue,
-                    });
-                }}
-              />
-            </Box>
-          )}
+          <div
+            className="bg-stone-800 p-2 px-4 border-[0.1px] border-black/30 cursor-pointer hover:bg-white/50 rounded-md font-classic text-xs text-white/70 transition-all duration-200 shadow-md shadow-black/20"
+            onClick={() => router.push(`/books/${bookInfo.id}`)}
+          >
+            Detail
+          </div>
         </div>
       </div>
     </InteractiveCard>

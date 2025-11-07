@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-unsafe-function-type */
 "use client";
 
 import { DatePicker } from "@mui/x-date-pickers";
@@ -8,18 +9,15 @@ import { Dayjs } from "dayjs";
 import { useState } from "react";
 export default function DateReserve({
   onDateChange,
-  onLocationChange,
 }: {
   onDateChange: Function;
-  onLocationChange: Function;
 }) {
   const [reserveDate, setReserveDate] = useState<Dayjs | null>(null);
-  const [location, setLocation] = useState("");
   return (
-    <div className="w-fit">
+    <div className="w-fit flex gap-4 rounded-md bg-stone-100/40">
       <LocalizationProvider dateAdapter={AdapterDayjs}>
         <DatePicker
-          className="bg-white"
+          className="text-white"
           value={reserveDate}
           onChange={(value) => {
             setReserveDate(value);
@@ -28,7 +26,7 @@ export default function DateReserve({
         />
       </LocalizationProvider>
       {/* Venue */}
-      <div className="px-4">
+      {/* <div className="px-4">
         <label className="block text-sm font-medium text-gray-600 mb-2">
           Select Venue
         </label>
@@ -47,7 +45,7 @@ export default function DateReserve({
           <MenuItem value="Spark">Spark Space</MenuItem>
           <MenuItem value="GrandTable">The Grand Table</MenuItem>
         </Select>
-      </div>
+      </div> */}
     </div>
   );
 }
