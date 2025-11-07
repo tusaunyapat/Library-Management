@@ -85,8 +85,8 @@ export default function SignUp() {
           style={{ rotate: "20deg" }}
         />
         <div className="w-[30vw] px-12 py-16 bg-stone-200 flex flex-col gap-4 shadow-2xl mb-24">
-          <div className="text-4xl font-rollingStone text-base-400 mb-4">
-            TeamUpSpace
+          <div className="text-4xl font-classic text-base-400 mb-4">
+            CUPPA READ
           </div>
           <div className="flex flex-col">
             <div className="w-full flex items-center text-sm text-base-400">
