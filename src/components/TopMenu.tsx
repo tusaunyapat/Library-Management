@@ -9,33 +9,34 @@ export default async function TopMenu() {
   console.log("top menu");
 
   return (
-    <div className="flex flex-row gap-4 justify-between  items-center p-4 bg-white shadow-md h-18">
-      <div className="flex flex-row justify-start gap-6">
-        {session ? (
-          <Link href="/api/auth/signout">
-            <div className="flex items-center justify-start text-slate-900 text-md font-bold">
-              Sign-Out of {session.user.name}
-            </div>
-          </Link>
-        ) : (
-          <Link href="/api/auth/signin">
-            <div className="flex items-center justify-start text-slate-900 text-md font-bold">
-              Sign-In
-            </div>
-          </Link>
-        )}
-        <TopMenuItem title="My Booking" pageRef="/mybooking" />
+    <div className="fixed top-0 z-50 w-full flex flex-row gap-4 justify-between  items-center p-4 bg-white/10 shadow-md h-18 backdrop-blur-xs">
+      <div className="text-white/90 font-bold text-lg ml-8 cursor-pointer p-2">
+        CUPPA READS
       </div>
-      <div className="flex flex-row items-center">
-        <TopMenuItem title="Booking" pageRef="/booking" />
-        <div className="p-0">
-          <Image
-            src="/logo.png"
-            alt="logo"
-            width={50}
-            height={0}
-            className="h-auto w-auto"
-          />
+      <div className="flex flex-row items-center gap-12">
+        <div className="">HOME</div>
+        <div>test</div>
+        <div>test</div>
+      </div>
+      <div className="flex flex-row items-center gap-2">
+        <div className="flex flex-row justify-start gap-6">
+          {session ? (
+            <Link href="/api/auth/signout">
+              <div className="flex items-center justify-start text-slate-900 text-md font-bold">
+                Sign-Out of {session.user.name}
+              </div>
+            </Link>
+          ) : (
+            <Link href="/api/auth/signin">
+              <div className="flex items-center justify-start text-slate-900 text-md font-bold">
+                SIGN-IN
+              </div>
+            </Link>
+          )}
+          {/* <TopMenuItem title="My Booking" pageRef="/mybooking" /> */}
+        </div>
+        <div className="flex flex-row items-center">
+          {/* <TopMenuItem title="Booking" pageRef="/booking" /> */}
         </div>
       </div>
     </div>

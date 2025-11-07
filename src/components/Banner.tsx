@@ -1,3 +1,4 @@
+/* eslint-disable @next/next/no-img-element */
 "use client";
 import React, { useState } from "react";
 import Image from "next/image";
@@ -20,9 +21,10 @@ export default function Banner() {
       className="relative w-full h-screen overflow-hidden"
       onClick={handleClick}
     >
-      <img
-        src={`/img/${imageSrc[index]}`}
+      <Image
+        src={`/library1.jpg`}
         alt={`Banner ${index + 1}`}
+        fill
         className={`object-cover transition-opacity duration-1000 h-full w-full`}
       />
 
@@ -31,7 +33,7 @@ export default function Banner() {
           where every event finds its venue
         </h1>
         <h2 className="text-lg md:text-xl text-gray-200 max-w-2xl drop-shadow">
-          Finding the perfect venue has never been easier. Whether it's a
+          Finding the perfect venue has never been easier. Whether it&apos;s a
           wedding, corporate event, or private party, we connect people to the
           perfect place.
         </h2>

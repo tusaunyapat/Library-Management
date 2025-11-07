@@ -9,7 +9,7 @@ export default function TopMenuItem({
 }) {
   return (
     <Link
-      className="w-24 font-bold text-black  hover:text-blue-600 transition ease-in-out duration-300"
+      className="px-4 py-2 text-white/90 font-bold bg-amber-950 rounded-md hover:bg-amber-950/70 transition-all duration-200"
       href={pageRef}
     >
       {title}
