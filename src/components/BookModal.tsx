@@ -81,6 +81,7 @@ export default function BookModal({ initialData, type }: BookModalProps) {
 
       <Dialog open={open} onClose={handleClose} fullWidth maxWidth="sm">
         <DialogTitle>{initialData ? "Edit Book" : "Add New Book"}</DialogTitle>
+
         <DialogContent>
           <Grid container spacing={2}>
             {/* Title */}
