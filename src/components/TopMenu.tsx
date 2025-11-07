@@ -32,13 +32,19 @@ export default function TopMenu() {
             <>
               <Link
                 className="cursor-pointer p-3 px-6 hover:bg-white/10 rounded-md hover:underline underline-offset-3"
+                href={"/books"}
+              >
+                BOOKS
+              </Link>
+              <Link
+                className="cursor-pointer p-3 px-6 hover:bg-white/10 rounded-md hover:underline underline-offset-3"
                 href={"/managebook"}
               >
                 MANAGE BOOKS
               </Link>
               <Link
                 className="cursor-pointer p-3 px-6 hover:bg-white/10 rounded-md hover:underline underline-offset-3"
-                href={"/maanagereservation"}
+                href={"/managereservation"}
               >
                 MANAGE RESERVATIONS
               </Link>

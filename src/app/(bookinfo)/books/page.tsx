@@ -15,7 +15,7 @@ export default function Book() {
   useEffect(() => {
     const handler = setTimeout(() => {
       setDebouncedInput(searchInput);
-    }, 700);
+    }, 300);
 
     return () => {
       clearTimeout(handler);

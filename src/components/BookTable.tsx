@@ -145,6 +145,7 @@ export default function BookTable({ books }: BookTableProps) {
                 <TableCell>{book.availableAmount}</TableCell>
                 <TableCell>
                   <BookModal type="edit" initialData={book} />
+                  &nbsp; &nbsp;
                   <Button
                     variant="contained"
                     sx={{

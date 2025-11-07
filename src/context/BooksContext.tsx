@@ -14,6 +14,9 @@ import updateBookApi from "@/libs/updateBook";
 import deleteBookApi from "@/libs/deleteBook";
 import { BookItem } from "@/type/interface";
 import { useSession } from "next-auth/react";
+import getReservations from "@/libs/getAllReservation";
+import updateReservation from "@/libs/updateReservation";
+import deleteReservation from "@/libs/deleteReservation";
 
 //define context structure
 interface BooksContextType {
@@ -22,6 +25,11 @@ interface BooksContextType {
   createBook: (data: Omit<BookItem, "_id" | "id">) => Promise<void>;
   updateBook: (id: string, data: Omit<BookItem, "_id" | "id">) => Promise<void>;
   deleteBook: (id: string) => Promise<void>;
+
+  reservations: any[];
+  refreshReservations: () => Promise<void>;
+  updateReservation: (id: string, reservationData: any) => Promise<void>;
+  deleteReservation: (id: string) => Promise<void>;
 }
 
 //create context
@@ -33,11 +41,17 @@ export function BooksProvider({ children }: { children: ReactNode }) {
   const token = session?.user?.token ?? "";
 
   const [books, setBooks] = useState<BookItem[]>([]);
+  const [reservations, setReservations] = useState<any[]>([]);
 
   //load books initially
   const refreshBooks = async () => {
     const res = await getBooks();
     setBooks(res.data);
+  };
+
+  const refreshReservations = async () => {
+    const res = await getReservations(token);
+    setReservations(res.data);
   };
 
   //create
@@ -58,8 +72,19 @@ export function BooksProvider({ children }: { children: ReactNode }) {
     await refreshBooks();
   };
 
+  const updateReservationData = async (id: string, reservationData: any) => {
+    await updateReservation(id, reservationData, token);
+    await refreshReservations();
+  };
+
+  const deleteReservationData = async (id: string) => {
+    await deleteReservation(id, token);
+    await refreshReservations();
+  };
+
   useEffect(() => {
     refreshBooks();
+    refreshReservations();
   }, []);
 
   return (
@@ -70,6 +95,10 @@ export function BooksProvider({ children }: { children: ReactNode }) {
         createBook,
         updateBook,
         deleteBook,
+        reservations,
+        refreshReservations,
+        updateReservation: updateReservationData,
+        deleteReservation: deleteReservationData,
       }}
     >
       {children}
