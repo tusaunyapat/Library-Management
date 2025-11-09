@@ -1,3 +1,123 @@
+// /* eslint-disable @typescript-eslint/no-unused-vars */
+// /* eslint-disable @typescript-eslint/no-explicit-any */
+// "use client";
+
+// import Link from "next/link";
+// import { FcGoogle } from "react-icons/fc";
+// import Image from "next/image";
+// import { useState } from "react";
+// import { FaHandPointLeft } from "react-icons/fa6";
+// import { useRouter } from "next/navigation";
+// import { signIn } from "next-auth/react"; // ✅ เพิ่ม
+
+// export default function Home() {
+//   const [emailOrUsername, setEmailOrUsername] = useState("");
+//   const [password, setPassword] = useState("");
+//   const [loading, setLoading] = useState(false);
+//   const [error, setError] = useState("");
+//   const router = useRouter();
+
+//   const handleSignIn = async () => {
+//     setLoading(true);
+//     setError("");
+
+//     const res = await signIn("credentials", {
+//       email: emailOrUsername,
+//       password,
+//       redirect: false, // ❗ ปิด redirect อัตโนมัติ (จัดการเอง)
+//     });
+
+//     if (res?.error) {
+//       setError("Invalid email/username or password");
+//     } else if (res?.ok) {
+//       router.push("/"); // ✅ ไปหน้า home หลังล็อกอินสำเร็จ
+//     }
+
+//     setLoading(false);
+//   };
+
+//   return (
+//     <>
+//       <Link
+//         className="fixed top-6 left-6 text-base-400 font-bold flex flex-row gap-2 items-center py-2 px-4 border-b-[1px] border-base-300 text-xl hover:bg-white/80 cursor-pointer bg-white/40"
+//         href={"/"}
+//       >
+//         <FaHandPointLeft />
+//         Home
+//       </Link>
+//       <Image
+//         src={"/images/cat1.png"}
+//         width={300}
+//         height={300}
+//         alt="LoginCat"
+//         className="fixed right-0 -bottom-24"
+//       />
+//       <div className="w-[100vw] h-[100vh] flex justify-center items-center flex-col">
+//         <Image
+//           src={"/images/dog1.png"}
+//           width={100}
+//           height={100}
+//           alt="LoginCat"
+//           className="relative top-7 right-28"
+//           style={{ rotate: "20deg" }}
+//         />
+//         <div className="w-[30vw] px-12 py-16 bg-stone-200 flex flex-col gap-4 shadow-2xl mb-32">
+//           <div className="text-4xl font-classic text-base-400 mb-4">
+//             Cuppa Read
+//           </div>
+//           <div className="flex flex-col">
+//             <div className="w-full flex items-center text-sm text-base-400">
+//               {`Good to see you again 👋 Log in to your account.`}
+//             </div>
+//           </div>
+//           <input
+//             className="p-4 items-center border-[1px] border-base-300 rounded-md"
+//             type="text"
+//             placeholder="Email"
+//             value={emailOrUsername}
+//             onChange={(e) => setEmailOrUsername(e.target.value)}
+//             disabled={loading}
+//           />
+//           <input
+//             className="p-4 items-center border-[1px] border-base-300 rounded-md"
+//             type="password"
+//             placeholder="Password"
+//             value={password}
+//             onChange={(e) => setPassword(e.target.value)}
+//             disabled={loading}
+//           />
+//           <div className="flex justify-between w-full">
+//             <div className="flex gap-1">
+//               <input type="checkbox" disabled={loading} />
+//               <div className="text-sm text-base-400">remember me</div>
+//             </div>
+//             <div className="text-sm text-base-400 hover:underline underline-offset-2 cursor-pointer">
+//               forgot password?
+//             </div>
+//           </div>
+//           {error && <div className="text-red-500 text-sm mb-2">{error}</div>}
+//           <button
+//             className="w-full bg-stone-400 hover:bg-stone-500 cursor-pointer rounded-xl p-4 flex justify-center items-center font-bold text-base-400 text-lg"
+//             onClick={handleSignIn}
+//             disabled={loading}
+//           >
+//             {loading ? "Signing in..." : "Sign in"}
+//           </button>
+//           <div className="w-full flex items-center text-sm text-base-400 gap-2">
+//             <div className="text-base-400/70 text-sm">Are you new here?</div>
+//             <Link
+//               href={"/signup"}
+//               className="text-base-400 font-bold hover:text-amber-800/90 hover:underline underline-offset-2"
+//             >
+//               Create an account
+//             </Link>
+//           </div>
+//         </div>
+//       </div>
+//     </>
+//   );
+// }
+
 /* eslint-disable @typescript-eslint/no-unused-vars */
 /* eslint-disable @typescript-eslint/no-explicit-any */
 "use client";
@@ -8,7 +128,7 @@ import Image from "next/image";
 import { useState } from "react";
 import { FaHandPointLeft } from "react-icons/fa6";
 import { useRouter } from "next/navigation";
-import { signIn } from "next-auth/react"; // ✅ เพิ่ม
+import { signIn } from "next-auth/react";
 
 export default function Home() {
   const [emailOrUsername, setEmailOrUsername] = useState("");
@@ -24,13 +144,13 @@ export default function Home() {
     const res = await signIn("credentials", {
       email: emailOrUsername,
       password,
-      redirect: false, // ❗ ปิด redirect อัตโนมัติ (จัดการเอง)
+      redirect: false,
     });
 
     if (res?.error) {
       setError("Invalid email/username or password");
     } else if (res?.ok) {
-      router.push("/"); // ✅ ไปหน้า home หลังล็อกอินสำเร็จ
+      router.push("/");
     }
 
     setLoading(false);
@@ -38,40 +158,44 @@ export default function Home() {
 
   return (
     <>
+      {/* Back to Home Button */}
       <Link
-        className="fixed top-6 left-6 text-base-400 font-bold flex flex-row gap-2 items-center py-2 px-4 border-b-[1px] border-base-300 text-xl hover:bg-white/80 cursor-pointer bg-white/40"
+        className="fixed top-4 left-4 flex items-center gap-2 text-base-400 font-bold py-2 px-4 border border-base-300 rounded-md bg-white/40 hover:bg-white/80 transition-all duration-200 cursor-pointer text-lg"
         href={"/"}
       >
         <FaHandPointLeft />
         Home
       </Link>
+
+      {/* Background Decorations */}
       <Image
         src={"/images/cat1.png"}
-        width={300}
-        height={300}
+        width={250}
+        height={250}
         alt="LoginCat"
-        className="fixed right-0 -bottom-24"
+        className="fixed right-0 -bottom-20 opacity-90 hidden sm:block"
       />
-      <div className="w-[100vw] h-[100vh] flex justify-center items-center flex-col">
-        <Image
-          src={"/images/dog1.png"}
-          width={100}
-          height={100}
-          alt="LoginCat"
-          className="relative top-7 right-28"
-          style={{ rotate: "20deg" }}
-        />
-        <div className="w-[30vw] px-12 py-16 bg-stone-200 flex flex-col gap-4 shadow-2xl mb-32">
-          <div className="text-4xl font-classic text-base-400 mb-4">
+      {/* <Image
+        src={"/images/dog1.png"}
+        width={100}
+        height={100}
+        alt="LoginDog"
+        className="absolute top-12 right-12 rotate-[20deg] hidden md:block"
+      /> */}
+
+      {/* Main Container */}
+      <div className="w-screen h-screen flex justify-center items-center p-4">
+        <div className="w-full max-w-md sm:max-w-lg md:max-w-xl lg:max-w-2xl px-6 sm:px-10 py-10 sm:py-14 bg-stone-200 rounded-xl shadow-2xl flex flex-col gap-4 text-base-400 backdrop-blur-md">
+          <div className="text-3xl sm:text-4xl font-classic text-center mb-4">
             Cuppa Read
           </div>
-          <div className="flex flex-col">
-            <div className="w-full flex items-center text-sm text-base-400">
-              {`Good to see you again 👋 Log in to your account.`}
-            </div>
+          <div className="text-center text-sm sm:text-base text-base-400 mb-6">
+            {`Good to see you again 👋 Log in to your account.`}
           </div>
+
+          {/* Inputs */}
           <input
-            className="p-4 items-center border-[1px] border-base-300 rounded-md"
+            className="p-3 sm:p-4 border border-base-300 rounded-md text-base w-full focus:outline-none focus:ring-2 focus:ring-stone-400 transition-all duration-150"
             type="text"
             placeholder="Email"
             value={emailOrUsername}
@@ -79,35 +203,45 @@ export default function Home() {
             disabled={loading}
           />
           <input
-            className="p-4 items-center border-[1px] border-base-300 rounded-md"
+            className="p-3 sm:p-4 border border-base-300 rounded-md text-base w-full focus:outline-none focus:ring-2 focus:ring-stone-400 transition-all duration-150"
             type="password"
             placeholder="Password"
             value={password}
             onChange={(e) => setPassword(e.target.value)}
             disabled={loading}
           />
-          <div className="flex justify-between w-full">
-            <div className="flex gap-1">
+
+          {/* Remember + Forgot */}
+          <div className="flex justify-between items-center w-full text-sm text-base-400 mt-2">
+            <label className="flex items-center gap-2 cursor-pointer">
               <input type="checkbox" disabled={loading} />
-              <div className="text-sm text-base-400">remember me</div>
-            </div>
-            <div className="text-sm text-base-400 hover:underline underline-offset-2 cursor-pointer">
-              forgot password?
+              <span>Remember me</span>
+            </label>
+            <div className="hover:underline underline-offset-2 cursor-pointer">
+              Forgot password?
             </div>
           </div>
-          {error && <div className="text-red-500 text-sm mb-2">{error}</div>}
+
+          {/* Error Message */}
+          {error && (
+            <div className="text-red-500 text-sm mt-2 text-center">{error}</div>
+          )}
+
+          {/* Sign In Button */}
           <button
-            className="w-full bg-stone-400 hover:bg-stone-500 cursor-pointer rounded-xl p-4 flex justify-center items-center font-bold text-base-400 text-lg"
+            className="w-full mt-4 bg-stone-400 hover:bg-stone-500 text-white font-bold text-lg py-3 sm:py-4 rounded-xl transition-all duration-200 disabled:opacity-60"
             onClick={handleSignIn}
             disabled={loading}
           >
             {loading ? "Signing in..." : "Sign in"}
           </button>
-          <div className="w-full flex items-center text-sm text-base-400 gap-2">
-            <div className="text-base-400/70 text-sm">Are you new here?</div>
+
+          {/* Sign Up Link */}
+          <div className="w-full text-center mt-4 text-sm sm:text-base text-base-400">
+            <span className="text-base-400/70">Are you new here?</span>{" "}
             <Link
               href={"/signup"}
-              className="text-base-400 font-bold hover:text-amber-800/90 hover:underline underline-offset-2"
+              className="font-bold text-stone-600 hover:text-amber-800 hover:underline underline-offset-2 transition-all duration-150"
             >
               Create an account
             </Link>

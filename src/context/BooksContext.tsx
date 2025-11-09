@@ -50,7 +50,11 @@ export function BooksProvider({ children }: { children: ReactNode }) {
   };
 
   const refreshReservations = async () => {
+    if (!token) {
+      return;
+    }
     const res = await getReservations(token);
+    if (!res) return;
     setReservations(res.data);
   };
 

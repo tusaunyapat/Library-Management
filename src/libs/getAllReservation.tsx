@@ -1,5 +1,8 @@
 export default async function getReservations(token: string) {
   console.log(process.env.NEXT_PUBLIC_BACKEND_URL);
+  if (!token) {
+    return;
+  }
   const response = await fetch(
     `${process.env.NEXT_PUBLIC_BACKEND_URL}/api/v1/reservations`,
     {
