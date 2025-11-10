@@ -47,6 +47,7 @@ export function BooksProvider({ children }: { children: ReactNode }) {
   const refreshBooks = async () => {
     const res = await getBooks();
     setBooks(res.data);
+    console.log(res.data);
   };
 
   const refreshReservations = async () => {
@@ -56,6 +57,7 @@ export function BooksProvider({ children }: { children: ReactNode }) {
     const res = await getReservations(token);
     if (!res) return;
     setReservations(res.data);
+    console.log(res.data);
   };
 
   //create
@@ -88,8 +90,11 @@ export function BooksProvider({ children }: { children: ReactNode }) {
 
   useEffect(() => {
     refreshBooks();
-    refreshReservations();
   }, []);
+
+  useEffect(() => {
+    refreshReservations();
+  }, [token]);
 
   return (
     <BooksContext.Provider
