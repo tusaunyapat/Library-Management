@@ -34,6 +34,22 @@ export default function Form({
   const router = useRouter();
 
   useEffect(() => {
+    if (!pickupDate) return;
+
+    const pickup = dayjs(pickupDate);
+    // const borrow = dayjs(reservation.borrowDate);
+    const today = dayjs().startOf("day");
+
+    if (!pickup.isValid()) return;
+
+    if (pickup.isBefore(today, "day")) {
+      setError("Pickup date cannot be in the past.");
+    } else {
+      setError("");
+    }
+  }, [pickupDate]);
+
+  useEffect(() => {
     const loadReservations = async () => {
       const response = await fetch(
         `${process.env.NEXT_PUBLIC_BACKEND_URL}/api/v1/reservations`,
@@ -118,6 +134,13 @@ export default function Form({
               setPickupDate(value);
             }}
           />
+          {error && (
+            <div className="flex flex-row w-full justify-center bg-black/30 mt-2 py-2 px-4 rounded-md font-bold">
+              <p className="text-red-500 text-center   font-mono text-xs   w-fit">
+                {error}
+              </p>
+            </div>
+          )}
         </div>
       </div>
 
@@ -137,13 +160,6 @@ export default function Form({
             ? "Requesting..."
             : "Request Reservation"}
         </button>
-      </div>
-      <div className="flex flex-row w-full justify-center">
-        {error && (
-          <p className="text-red-500 text-center mt-4  font-mono text-xs bg-black/30 rounded-md p-1 px-4 w-fit">
-            {error}
-          </p>
-        )}
       </div>
     </div>
   );
