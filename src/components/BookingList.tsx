@@ -51,7 +51,7 @@ export default function BookingList({ books }: { books: any }) {
     <div
       className="
         grid w-full gap-4
-        grid-cols-1 sm:grid-cols-3 lg:grid-cols-4
+        grid-cols-1 sm:grid-cols-3 
         auto-rows-fr
       "
     >

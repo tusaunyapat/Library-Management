@@ -35,7 +35,7 @@ export default function Book() {
   }, [books, debouncedInput]);
 
   return (
-    <main className="mx-auto text-center p-5 w-full md:w-10/12 flex flex-col items-center mt-28 z-49">
+    <main className="mx-auto text-center p-5 w-full lg:w-10/12 flex flex-col items-center mt-28 z-49">
       <h1 className="text-3xl font-serif text-white/90 z-49">
         Search for Books in the Library
       </h1>

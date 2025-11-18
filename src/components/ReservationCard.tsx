@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 "use client";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Image from "next/image";
 import InteractiveCard from "./InteractiveCard";
 import Box from "@mui/material/Box";
@@ -9,7 +9,7 @@ import Typography from "@mui/material/Typography";
 import { BookItem } from "@/type/interface";
 import { useRouter } from "next/navigation";
 import DateReserve from "./DateReserve";
-import { Dayjs } from "dayjs";
+import dayjs, { Dayjs } from "dayjs";
 import updateReservation from "@/libs/updateReservation";
 import { useSession } from "next-auth/react";
 import deleteReservation from "@/libs/deleteReservation";
@@ -29,8 +29,24 @@ const ReservationCard: React.FC<ReservationCardProps> = ({
     bookReservation.pickupDate
   );
   const [isDeleted, setIsDeleted] = useState(false);
+  const [error, setError] = useState<string>("");
 
   const { data: session } = useSession();
+
+  useEffect(() => {
+    if (!pickupDate || !bookReservation.borrowDate) return;
+
+    const pickup = dayjs(pickupDate);
+    const borrow = dayjs(bookReservation.borrowDate);
+
+    if (!pickup.isValid() || !borrow.isValid()) return;
+
+    if (pickup.isBefore(borrow, "day")) {
+      setError("Pickup date cannot be in the past.");
+    } else {
+      setError("");
+    }
+  }, [pickupDate, bookReservation.borrowDate]);
 
   const formatDate = (dateString: string) => {
     const date = new Date(dateString);
@@ -102,7 +118,7 @@ const ReservationCard: React.FC<ReservationCardProps> = ({
           </div>
         )}
         {editMode ? (
-          <div className="">
+          <div className="w-5/6">
             <label className="block text-sm font-medium text-white/70 mb-2">
               Pickup Date
             </label>
@@ -111,6 +127,9 @@ const ReservationCard: React.FC<ReservationCardProps> = ({
                 setPickupDate(value);
               }}
             />
+            {error && (
+              <p className="text-red-500 text-sm font-bold py-2">{error}</p>
+            )}
           </div>
         ) : deleteMode ? null : (
           <div className="my-2 text-white/60 font-classic text-[10px]">

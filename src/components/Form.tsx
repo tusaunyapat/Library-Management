@@ -24,8 +24,6 @@ export default function Form({
   const [submitting, setSubmitting] = useState(false);
   const [isCreated, setIsCreated] = useState(false);
 
-  const [isReserved, setIsReserved] = useState(false);
-
   const [error, setError] = useState<string>("");
 
   const [reservations, setReservations] = useState([]);
@@ -89,8 +87,8 @@ export default function Form({
 
   return (
     <div className="w-full">
-      <div className="flex flex-row gap-4 my-4">
-        <div className="px-4">
+      <div className="flex flex-col lg:flex-row gap-4 my-4 w-full">
+        <div className="px-4 w-full">
           <label className="block text-sm font-medium text-white/70 mb-2">
             Borrow Date
           </label>
@@ -99,7 +97,7 @@ export default function Form({
             TODAY
           </div>
         </div>
-        <div className="px-4">
+        <div className="px-4 w-full">
           <label className="block text-sm font-medium text-white/70 mb-2">
             Pickup Date
           </label>

@@ -192,12 +192,12 @@ exports.updateReservation = async (req, res, next) => {
         error: "Invalid pickup date",
       });
     }
-    if (req.body.borrowDate && borrowDate < today) {
-      return res.status(400).json({
-        success: false,
-        error: "Reservation date must not be earlier than today",
-      });
-    }
+    // if (req.body.borrowDate && borrowDate < today) {
+    //   return res.status(400).json({
+    //     success: false,
+    //     error: "Reservation date must not be earlier than today",
+    //   });
+    // }
     if (req.body.borrowDate && req.body.pickupDate && pickupDate < borrowDate) {
       return res.status(400).json({
         success: false,

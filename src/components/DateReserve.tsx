@@ -14,10 +14,10 @@ export default function DateReserve({
 }) {
   const [reserveDate, setReserveDate] = useState<Dayjs | null>(null);
   return (
-    <div className="w-fit flex gap-4 rounded-md bg-stone-100/40">
+    <div className="w-full flex gap-4 rounded-md bg-stone-100/40">
       <LocalizationProvider dateAdapter={AdapterDayjs}>
         <DatePicker
-          className="text-white"
+          className="text-white w-full"
           value={reserveDate}
           onChange={(value) => {
             setReserveDate(value);
