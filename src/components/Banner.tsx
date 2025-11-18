@@ -13,7 +13,7 @@ export default function Banner() {
       <div className="flex flex-col items-center px-6">
         <div className="mt-18"></div>
         <div className="w-full h-full flex flex-col items-center justify-center mb-28">
-          <div className="text-4xl font-classic font-bold text-white/90 z-49">
+          <div className="text-4xl font-classic font-bold text-white/90 z-49 text-center">
             A World of Stories Awaits
           </div>
           <div className="text-xs font-classic font-bold text-white/60 w-[60vw] mt-4 text-center z-49">

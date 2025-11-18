@@ -18,7 +18,7 @@ const Card: React.FC<CardProps> = ({ bookInfo }) => {
   return (
     <InteractiveCard>
       <div className="flex flex-col justify-between h-full w-full rounded-lg shadow-lg hover:shadow-xl transition-shadow duration-300 items-center p-2 pb-8 pt-6">
-        <div className="flex flex-col">
+        <div className="flex flex-col w-full items-center">
           <div className="w-[80%] flex justify-center h-40 relative mb-4">
             <Image
               // className="w-52 h-72"
