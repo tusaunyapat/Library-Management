@@ -1,3 +1,5 @@
+"use client";
+
 /* eslint-disable react-hooks/set-state-in-effect */
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { TextField, Select, MenuItem } from "@mui/material";
@@ -67,10 +69,20 @@ export default function Form({
       return;
     }
 
+    if (!pickupDate) {
+      setError("Please select a pickup date.");
+      return;
+    }
+
     if (reservations.length >= 3) {
       setError(
         "You have reached the maximum number of active reservations (3). Please cancel an existing reservation before making a new one."
       );
+      return;
+    }
+
+    if (pickupDate && dayjs(pickupDate).isBefore(dayjs(), "day")) {
+      setError("Pickup date cannot be in the past.");
       return;
     }
 
@@ -128,7 +140,7 @@ export default function Form({
       </div>
       <div className="flex flex-row w-full justify-center">
         {error && (
-          <p className="text-red-600 text-center mt-4  font-mono text-xs bg-black/30 rounded-md p-1 px-4 w-fit">
+          <p className="text-red-500 text-center mt-4  font-mono text-xs bg-black/30 rounded-md p-1 px-4 w-fit">
             {error}
           </p>
         )}
