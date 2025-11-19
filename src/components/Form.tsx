@@ -25,6 +25,7 @@ export default function Form({
   const [pickupDate, setPickupDate] = useState<Dayjs | null>(null);
   const [submitting, setSubmitting] = useState(false);
   const [isCreated, setIsCreated] = useState(false);
+  const [isBorrowing, setIsBorrowing] = useState(false);
 
   const [error, setError] = useState<string>("");
 
@@ -73,7 +74,15 @@ export default function Form({
     );
     if (existingReservation) {
       // setIsReserved(true);
-      setIsCreated(true);
+      // setIsCreated(true);
+      // if ((existingReservation as any).pickupDate <= new Date().toISOString()) {
+      //   console.log(
+      //     (existingReservation as any).pickupDate,
+      //     " ",
+      //     new Date().toISOString()
+      //   );
+      //   setIsBorrowing(true);
+      // }
     } else {
       // setIsReserved(false);
     }
@@ -155,7 +164,9 @@ export default function Form({
           }`}
         >
           {isCreated
-            ? "Requested"
+            ? isBorrowing
+              ? "Borrowing"
+              : "Requested"
             : submitting
             ? "Requesting..."
             : "Request Reservation"}

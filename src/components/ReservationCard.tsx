@@ -177,7 +177,7 @@ const ReservationCard: React.FC<ReservationCardProps> = ({
                 className="bg-stone-700 p-2 px-4 border-[0.1px] border-black/30 cursor-pointer hover:bg-white/50 rounded-md font-classic text-xs text-white/50 transition-all duration-200 shadow-md shadow-black/20"
                 onClick={() => setDeleteMode(true)}
               >
-                Delete
+                Return
               </div>
               <div
                 className="bg-stone-800 p-2 px-4 border-[0.1px] border-black/30 cursor-pointer hover:bg-white/50 rounded-md font-classic text-xs text-white/70 transition-all duration-200 shadow-md shadow-black/20"
